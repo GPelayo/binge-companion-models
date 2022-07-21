@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='Binge Companion Models',
-      version='0.1',
+      version='0.1.1',
       description='Model Objects for Binge Companion',
       author='Geryl Pelayo',
       author_email='hi@gerylpelayo.com',

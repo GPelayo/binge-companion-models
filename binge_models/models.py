@@ -1,5 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import declarative_base, relationship
 
 
 Base = declarative_base()
@@ -12,6 +12,8 @@ class Series(Base):
     name = Column(String)
     season_count = Column(Integer)
     thumbnail_url = Column(String)
+    episodes = relationship('Episode')
+    series_trivia = relationship('Trivia')
 
     def __init__(self, series_id: str, name: str):
         self.series_id = series_id
@@ -29,6 +31,7 @@ class Episode(Base):
     name = Column(String)
     season = Column(Integer)
     series_id = Column(String, ForeignKey('series.series_id'))
+    trivia_list = relationship('Trivia')
 
     def __init__(self, episode_id: str, name: str, season: int, series_id: str):
         self.episode_id = episode_id
@@ -46,6 +49,7 @@ class Trivia(Base):
     score = Column(Integer)
     score_denominator = Column(Integer)
     text = Column(String)
+    trivia_tags = relationship('TriviaTag')
 
     def __init__(self, trivia_id: str, text: str, series_id: str, episode_id: str = None):
         self.trivia_id = trivia_id
