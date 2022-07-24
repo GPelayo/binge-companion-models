@@ -16,6 +16,7 @@ class Series(Base):
     series_trivia = relationship('Trivia')
 
     def __init__(self, series_id: str, name: str):
+        super().__init__()
         self.series_id = series_id
         self.name = name
         self.season_count = -1
@@ -34,6 +35,7 @@ class Episode(Base):
     trivia_list = relationship('Trivia')
 
     def __init__(self, episode_id: str, name: str, season: int, series_id: str):
+        super().__init__()
         self.episode_id = episode_id
         self.name = name
         self.season = season
@@ -52,6 +54,7 @@ class Trivia(Base):
     trivia_tags = relationship('TriviaTag')
 
     def __init__(self, trivia_id: str, text: str, series_id: str, episode_id: str = None):
+        super().__init__()
         self.trivia_id = trivia_id
         self.score = -1
         self.score_denominator = -1
@@ -68,5 +71,6 @@ class TriviaTag(Base):
     text = Column(String)
 
     def __init__(self, trivia_id: str, text: str):
+        super().__init__()
         self.trivia_id = trivia_id
         self.text = text
