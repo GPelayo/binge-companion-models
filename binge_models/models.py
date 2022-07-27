@@ -1,11 +1,15 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import declarative_base, relationship
-
+from sqlalchemy_serializer import SerializerMixin
 
 Base = declarative_base()
 
 
-class Series(Base):
+class BingeObject(Base, SerializerMixin):
+    __abstract__ = True
+
+
+class Series(BingeObject):
     __tablename__ = "series"
 
     series_id = Column(String, primary_key=True)
@@ -25,7 +29,7 @@ class Series(Base):
         self.series_wide_trivia = []
 
 
-class Episode(Base):
+class Episode(BingeObject):
     __tablename__ = "episode"
 
     episode_id = Column(String, primary_key=True)
@@ -42,7 +46,7 @@ class Episode(Base):
         self.series_id = series_id
 
 
-class Trivia(Base):
+class Trivia(BingeObject):
     __tablename__ = "trivia"
 
     trivia_id = Column(String, primary_key=True)
@@ -63,7 +67,7 @@ class Trivia(Base):
         self.episode_id = episode_id
 
 
-class TriviaTag(Base):
+class TriviaTag(BingeObject):
     __tablename__ = "trivia_tag"
 
     trivia_tag_id = Column(Integer, primary_key=True)
